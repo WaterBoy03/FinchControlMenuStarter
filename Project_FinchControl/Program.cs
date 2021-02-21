@@ -582,9 +582,10 @@ namespace Project_FinchControl
         static void ForwardCircle(Finch finchRobot)
         {
             var Random = new Random();
-            finchRobot.setMotors(200, 50);
+            
             for (int count = 0; count < 10; count++)
             {
+                finchRobot.setMotors(200, 50);
                 int redLight = Random.Next(0, 255);
                 int greenLight = Random.Next(0, 255);
                 int blueLight = Random.Next(0, 255);
@@ -598,9 +599,10 @@ namespace Project_FinchControl
         static void ReverseCircle(Finch finchRobot)
         {
             var Random = new Random();
-            finchRobot.setMotors(-50, -200);
+            
             for (int count = 0; count < 10; count++)
             {
+                finchRobot.setMotors(-50, -200);
                 int redLight = Random.Next(0, 255);
                 int greenLight = Random.Next(0, 255);
                 int blueLight = Random.Next(0, 255);
