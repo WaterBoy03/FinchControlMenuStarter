@@ -1028,6 +1028,7 @@ namespace Project_FinchControl
             return userResponse;
         }
 
+        //This validates an integert that is above zero.
         static int IntNumberValidationAboveZero(string numberResponse)
         {
             int numberOfDataPoints;
@@ -1041,12 +1042,14 @@ namespace Project_FinchControl
             return numberOfDataPoints;
 
         }
+
+        //This validates an integer that is zero or above.
         static int IntNumberValidationZeroOrAbove(string numberResponse)
         {
             int numberOfDataPoints;
             while (!Int32.TryParse(numberResponse, out numberOfDataPoints) || numberOfDataPoints < 0)
             {
-                Console.WriteLine("\tPlease enter an integer above zero.");
+                Console.WriteLine("\tPlease enter an integer that is zero or above.");
                 Console.Write("\tNumber of data points: ");
                 numberResponse = Console.ReadLine();
                 Console.WriteLine();
@@ -1054,6 +1057,8 @@ namespace Project_FinchControl
             return numberOfDataPoints;
 
         }
+
+        //This validates for a number above zero.
         static double DoubleNumberValidationAboveZero(string numberResponse)
         {
            double numberOfDataPoints;
@@ -1067,12 +1072,14 @@ namespace Project_FinchControl
             return numberOfDataPoints;
 
         }
+
+        //This validates a number that is 0 or above.
         static double DoubleNumberValidationZeroOrAbove(string numberResponse)
         {
             double numberOfDataPoints;
             while (!Double.TryParse(numberResponse, out numberOfDataPoints) || numberOfDataPoints < 0)
             {
-                Console.WriteLine("\tPlease enter a number above zero.");
+                Console.WriteLine("\tPlease enter a number that is zero or above.");
                 Console.Write("\tNumber of data points: ");
                 numberResponse = Console.ReadLine();
                 Console.WriteLine();
@@ -1080,6 +1087,8 @@ namespace Project_FinchControl
             return numberOfDataPoints;
 
         }
+
+        //This calculates the sum of an array.
         static double SumOfAnArray(double[] anArray)
         {
             double sum=0;
@@ -1087,13 +1096,10 @@ namespace Project_FinchControl
             {
                 sum += item;
             }
-            //for (int index = 0; index < anArray.Length; index++)
-            //{
-
-            //}
             return sum;
         }
-
+        
+        //This calculates the average of an array.
         static double AverageOfAnArray(double sum, int lengthArray)
         {
             double average=sum/lengthArray;
@@ -1103,6 +1109,8 @@ namespace Project_FinchControl
         #endregion
 
         #region DATA RECORDER
+
+        //This is the method for the Data Recorder Menu.
         static void DataRecorderDisplayMenuScreen(Finch finchRobot)
         {
             int numberOfDataPoints=0;
@@ -1167,6 +1175,7 @@ namespace Project_FinchControl
 
         }
 
+        //This method is for collecting and displaying light recording.
         static void DataRecordDisplayLightRecord(Finch finchRobot)
         {
             int numberOfLeft = 0;
@@ -1188,6 +1197,9 @@ namespace Project_FinchControl
 
             DisplayScreenHeader("Light Recording");
             Console.WriteLine();
+
+            //This requires the user to connect their finch for light recordings
+            //I realize that I don't code if the Finch gets disconnected during recording. I don't know what would happen...
             if (!finchRobot.connect())
             {
                 Console.WriteLine("\tPlease connect your Finch robot.");
@@ -1217,6 +1229,8 @@ namespace Project_FinchControl
                     leftAverage = AverageOfAnArray(leftSum, leftLightAmounts.Length);
                 }
                 DisplayContinuePrompt();
+
+                //Clears the screen for the right light readings.
                 DisplayScreenHeader("Light Recording");
                 Console.WriteLine();
                 Console.WriteLine("\tHow many light reading would you like to the right sensor to take?");
@@ -1236,8 +1250,10 @@ namespace Project_FinchControl
                 }
                 DisplayContinuePrompt();
 
+                //This section is if only one side took readings.
                 if (rightLightAmounts == null || leftLightAmounts == null)
                 {
+                    //This displays only the right light readings because the no left readings were taken.
                     if (leftLightAmounts == null)
                     {
                         Console.WriteLine("\tWould you like to see a table of your data? Yes or No");
@@ -1251,6 +1267,8 @@ namespace Project_FinchControl
                             DataRecorderDisplaySumAndAverages("Right", rightSum, rightAverage);
                         }
                     }
+
+                    //This displays only the left light readings because the no right readings were taken.
                     else if (rightLightAmounts == null)
                     {
                         Console.WriteLine("\tWould you like to see a table of your data? Yes or No");
@@ -1265,6 +1283,8 @@ namespace Project_FinchControl
                         }
                     }
                 }
+
+                //This shows both  light readings together if the user wants to see a table.
                 else
                 {
                     Console.WriteLine("\tWould you like to see a table of your data? Yes or No");
@@ -1317,6 +1337,7 @@ namespace Project_FinchControl
         //This creates an array the labels which sensor recorded the light amount. 
         static string[] DataRecordingLightSensorDirection(int lengthOfArray, string direction)
         {
+            //I needed to have an array size for it to work.
             string[] numberedDirections = new string[lengthOfArray];
             for (int index = 0; index < lengthOfArray; index++)
             {
@@ -1324,6 +1345,7 @@ namespace Project_FinchControl
             }
             return numberedDirections;
         }
+
         //This method turns on the right light sensor.
         static double[] DataRecordingRightLightReading(int numberOfRight, double rightFrequency, Finch finchRobot)
         {
@@ -1345,12 +1367,15 @@ namespace Project_FinchControl
 
             DisplayScreenHeader("Show Temperature Data");
             Console.WriteLine();
+
             //This if statement makes the user have to record data to view the table
             if (temperatures == null)
             {
                 Console.WriteLine("\tPlease go to Get Data to measure the temperature.");
 
             }
+
+            //This displays the table of temperature readings.
             else
             {
                 double tempSum = SumOfAnArray(temperatures);
@@ -1386,6 +1411,9 @@ namespace Project_FinchControl
             }
 
         }
+
+        //This displays the average and sum for the arrays. 
+        //The method is to be invoked after the the table method was called. 
         static void DataRecorderDisplaySumAndAverages(string forWhat,double sum, double average)
         {
             Console.WriteLine(
@@ -1420,8 +1448,7 @@ namespace Project_FinchControl
                 "-----------".PadLeft(15)
                 );
 
-            //display table data
-            
+            //display table data            
             for (int index = 0; index < temperatures.Length; index++)
             {
                 Console.WriteLine(
@@ -1430,18 +1457,23 @@ namespace Project_FinchControl
                 );
             }
         }
+
+        //This method allows the user collect temperature readings in Fahrenheit. 
         static double[] DataRecorderDisplayGetData(int numberOfDataPoints, double dataPointFrequency, Finch finchRobot)
         {
             double[] temperatures = new double[numberOfDataPoints];
             string userResponse;
 
             DisplayScreenHeader("Get Data");
+
+            //This prevents the user from trying to collect data without inputting how many and how often of temperature readings taken.
             if (numberOfDataPoints==0||dataPointFrequency==0)
             {
-                
                 Console.WriteLine("\tPlease return to the Data Recorder Menu.");
                 Console.WriteLine("\tYou need to enter the number of data points and the frequency for them to be recordered.");
             }
+
+            //Prompts the user to connect the Finch if it is not already connected.
             else if(!finchRobot.connect())
             {
                 Console.WriteLine("\tPlease connect your Finch robot.");
@@ -1453,6 +1485,8 @@ namespace Project_FinchControl
                     DisplayConnectFinchRobot(finchRobot);
                 }
             }
+
+            //An else statement that allows for the collection of temperatures.
             else 
             {                
                 Console.WriteLine($"\tNumber of data points: {numberOfDataPoints}");
@@ -1464,9 +1498,11 @@ namespace Project_FinchControl
                 for (int index = 0; index < numberOfDataPoints; index++)
                 {
                     temperatures[index] = finchRobot.getTemperature();
+
+                    //Allows for the temperature[index] to be converted to Fahrenheit and saved to the array
                     double celsiusTemp = temperatures[index];
                     double fahrenheitTemp = ConvertCelsiusToFahrenheit(celsiusTemp);
-                   temperatures[index]=fahrenheitTemp;
+                    temperatures[index] = fahrenheitTemp;
                     Console.WriteLine($"\tReading {index + 1}: {temperatures[index].ToString("n2")} °F");
                     int waitInSeconds = (int)(dataPointFrequency * 1000);
                     finchRobot.wait(waitInSeconds);
@@ -1480,14 +1516,13 @@ namespace Project_FinchControl
                 {
                     DisplayScreenHeader("Get Data");
                     Console.WriteLine();
-                    
+
+                    //Gets the average and sum of the array for the table
                     double tempSum = SumOfAnArray(temperatures);
                     double tempAverage = AverageOfAnArray(tempSum, temperatures.Length);
                     DataRecorderDisplayTable(temperatures);
                     DataRecorderDisplaySumAndAverages("Temperature", tempSum, tempAverage);
-                }
-                               
-                
+                }                            
             }
 
             DisplayContinuePrompt();
@@ -1543,6 +1578,8 @@ namespace Project_FinchControl
             }
                 return numberOfDataPoints;
         }
+
+        //My method for converting Celsius to Fahrenheit.
         static double ConvertCelsiusToFahrenheit(double celsiusTemp)
         {
             double FahrenheitTemp = celsiusTemp * 9 / 5 + 32;
