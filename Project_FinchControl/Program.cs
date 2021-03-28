@@ -95,7 +95,7 @@ namespace Project_FinchControl
 
                 //
                 // get user menu choice
-                
+
                 Console.WriteLine("\ta) Connect Finch Robot");
                 Console.WriteLine("\tb) Talent Show");
                 Console.WriteLine("\tc) Data Recorder");
@@ -128,7 +128,7 @@ namespace Project_FinchControl
 
                     case "e":
                         UserProgrammingDisplayMenuScreen(finchRobot);
-                       break;
+                        break;
 
                     case "f":
                         DisplayDisconnectFinchRobot(finchRobot);
@@ -213,7 +213,7 @@ namespace Project_FinchControl
             } while (!quitTalentShowMenu);
         }
 
-        
+
         /// *****************************************************************
         /// *               Talent Show > Light and Sound                   *
         /// *****************************************************************
@@ -304,7 +304,7 @@ namespace Project_FinchControl
             Console.WriteLine("\t8) White");
             colorNumber = Console.ReadLine();
             Console.WriteLine();
-            while (!Int32.TryParse(colorNumber, out colorInteger)||!(colorInteger >= 0 && colorInteger <= 8))
+            while (!Int32.TryParse(colorNumber, out colorInteger) || !(colorInteger >= 0 && colorInteger <= 8))
             {
                 if (colorInteger < 0 || colorInteger > 9)
                 {
@@ -532,7 +532,7 @@ namespace Project_FinchControl
             bool doneDance = false;
             while (!doneDance)
             {
-                finchRobot.setMotors(-10, 155);
+                finchRobot.setMotors(-100, 155);
                 //Note A in Octave 4 and color blue
                 finchRobot.setLED(0, 0, 255);
                 finchRobot.noteOn(440);
@@ -550,7 +550,7 @@ namespace Project_FinchControl
                 finchRobot.noteOff();
                 finchRobot.wait(100);
 
-                finchRobot.setMotors(155, -10);
+                finchRobot.setMotors(155, -100);
                 //Note A in Octave 4 and color blue
                 finchRobot.setLED(0, 0, 255);
                 finchRobot.noteOn(440);
@@ -568,7 +568,7 @@ namespace Project_FinchControl
                 finchRobot.noteOff();
                 finchRobot.wait(100);
 
-                finchRobot.setMotors(-30, 10);
+                finchRobot.setMotors(-255, 100);
                 //Note B in Octave 4 and color red
                 finchRobot.setLED(255, 0, 0);
                 finchRobot.noteOn(494);
@@ -613,7 +613,7 @@ namespace Project_FinchControl
         static void ForwardCircle(Finch finchRobot)
         {
             var Random = new Random();
-            
+
             for (int count = 0; count < 10; count++)
             {
                 finchRobot.setMotors(200, 50);
@@ -630,7 +630,7 @@ namespace Project_FinchControl
         static void ReverseCircle(Finch finchRobot)
         {
             var Random = new Random();
-            
+
             for (int count = 0; count < 10; count++)
             {
                 finchRobot.setMotors(-50, -200);
@@ -681,22 +681,22 @@ namespace Project_FinchControl
             Console.CursorVisible = false;
 
             bool robotConnected;
-            bool connectionWanted=true;
+            bool connectionWanted = true;
             string connectionResponse;
             string testWanted;
-            
+
 
             DisplayScreenHeader("Connect Finch Robot");
 
             Console.WriteLine("\tAbout to connect to Finch robot. Please be sure the USB cable is connected to the robot and computer now.");
             DisplayContinuePrompt();
             Console.WriteLine();
-            
+
             robotConnected = finchRobot.connect();
 
             //I didn't have my Finch properly connected while practicing, so I made this loop to show that it wasn't connected.
             while (robotConnected != connectionWanted)
-            {            
+            {
                 Console.WriteLine("\tThere was an error with the connection.");
                 Console.WriteLine("\tMake sure that the robot is properly connected to the computer.");
                 Console.WriteLine("\tWould you like to try again? (Yes or No)");
@@ -704,12 +704,12 @@ namespace Project_FinchControl
                 Console.WriteLine();
                 finchRobot.disConnect();
                 while (connectionResponse != "no" && connectionResponse != "yes")
-                    {
-                        Console.WriteLine("\tPlease enter 'Yes' or 'No'.");
-                        connectionResponse = Console.ReadLine().ToLower();
-                    }
+                {
+                    Console.WriteLine("\tPlease enter 'Yes' or 'No'.");
+                    connectionResponse = Console.ReadLine().ToLower();
+                }
                 if (connectionResponse == "yes")
-                { 
+                {
                     Console.WriteLine("\tAttempting to connect to Finch robot.");
                     DisplayContinuePrompt();
                     robotConnected = finchRobot.connect();
@@ -721,8 +721,8 @@ namespace Project_FinchControl
                     connectionWanted = false;
 
                 }
-        
-                
+
+
             }
 
             // TODO test connection and provide user feedback - text, lights, sounds
@@ -773,8 +773,8 @@ namespace Project_FinchControl
                     }
                 }
             }
-           
-            
+
+
 
             DisplayMenuPrompt("Main Menu");
 
@@ -1050,7 +1050,7 @@ namespace Project_FinchControl
         /// <returns></returns>
         static string YesOrNoValidation(string userResponse)
         {
-            while (userResponse!="yes"&&userResponse!="no")
+            while (userResponse != "yes" && userResponse != "no")
             {
                 Console.WriteLine("\tPlease enter 'yes' or 'no'");
                 userResponse = Console.ReadLine().ToLower();
@@ -1111,7 +1111,7 @@ namespace Project_FinchControl
         //This validates for a number above zero.
         static double DoubleNumberValidationAboveZero(string numberResponse)
         {
-           double numberOfDataPoints;
+            double numberOfDataPoints;
             while (!Double.TryParse(numberResponse, out numberOfDataPoints) || numberOfDataPoints <= 0)
             {
                 Console.WriteLine("\tPlease enter a number above zero.");
@@ -1155,18 +1155,18 @@ namespace Project_FinchControl
         //This calculates the sum of an array.
         static double SumOfAnArray(double[] anArray)
         {
-            double sum=0;
-            foreach(double item in anArray)
+            double sum = 0;
+            foreach (double item in anArray)
             {
                 sum += item;
             }
             return sum;
         }
-        
+
         //This calculates the average of an array.
         static double AverageOfAnArray(double sum, int lengthArray)
         {
-            double average=sum/lengthArray;
+            double average = sum / lengthArray;
             return average;
         }
 
@@ -1177,8 +1177,8 @@ namespace Project_FinchControl
         //This is the method for the Data Recorder Menu.
         static void DataRecorderDisplayMenuScreen(Finch finchRobot)
         {
-            int numberOfDataPoints=0;
-            double dataPointFrequency=0;
+            int numberOfDataPoints = 0;
+            double dataPointFrequency = 0;
             double[] temperatures = null;
             Console.CursorVisible = true;
             bool quitMenu = false;
@@ -1205,15 +1205,15 @@ namespace Project_FinchControl
                 switch (menuChoice)
                 {
                     case "a":
-                        numberOfDataPoints=DataRecorderDisplayGetNumberOfDataPoints();
+                        numberOfDataPoints = DataRecorderDisplayGetNumberOfDataPoints();
                         break;
 
                     case "b":
-                        dataPointFrequency=DataRecorderDisplayGetDataPointFrequency();
+                        dataPointFrequency = DataRecorderDisplayGetDataPointFrequency();
                         break;
 
                     case "c":
-                        temperatures=DataRecorderDisplayGetData(numberOfDataPoints,dataPointFrequency,finchRobot);
+                        temperatures = DataRecorderDisplayGetData(numberOfDataPoints, dataPointFrequency, finchRobot);
                         break;
 
                     case "d":
@@ -1326,7 +1326,7 @@ namespace Project_FinchControl
                         if (userResponse == "yes")
                         {
                             DisplayScreenHeader("Light Recording");
-                            Array.Sort(rightLightAmounts,rightArray);
+                            Array.Sort(rightLightAmounts, rightArray);
                             DataRecorderDisplayLightTable(rightArray, rightLightAmounts);
                             DataRecorderDisplaySumAndAverages("Right", rightSum, rightAverage);
                         }
@@ -1341,7 +1341,7 @@ namespace Project_FinchControl
                         if (userResponse == "yes")
                         {
                             DisplayScreenHeader("Light Recording");
-                            Array.Sort(leftLightAmounts,leftArray);
+                            Array.Sort(leftLightAmounts, leftArray);
                             DataRecorderDisplayLightTable(leftArray, leftLightAmounts);
                             DataRecorderDisplaySumAndAverages("Left", leftSum, leftAverage);
                         }
@@ -1371,7 +1371,7 @@ namespace Project_FinchControl
                         myDir.AddRange(rightArray);
                         string[] bothDirectionArrays = myDir.ToArray();
                         DisplayScreenHeader("Light Recording");
-                        Array.Sort(bothLightAmounts,bothDirectionArrays);
+                        Array.Sort(bothLightAmounts, bothDirectionArrays);
                         DataRecorderDisplayLightTable(bothDirectionArrays, bothLightAmounts);
                         DataRecorderDisplaySumAndAverages("Left", leftSum, leftAverage);
                         DataRecorderDisplaySumAndAverages("Right", rightSum, rightAverage);
@@ -1478,13 +1478,13 @@ namespace Project_FinchControl
 
         //This displays the average and sum for the arrays. 
         //The method is to be invoked after the the table method was called. 
-        static void DataRecorderDisplaySumAndAverages(string forWhat,double sum, double average)
+        static void DataRecorderDisplaySumAndAverages(string forWhat, double sum, double average)
         {
             Console.WriteLine(
                 "-----------".PadLeft(15) +
                 "-----------".PadLeft(15)
                 );
-            if(forWhat=="Temperature")
+            if (forWhat == "Temperature")
             {
                 Console.WriteLine("\t{0} Sum: {1}", forWhat, sum.ToString("n2") + " °F");
                 Console.WriteLine("\t{0} Average: {1}", forWhat, average.ToString("n2") + " °F");
@@ -1494,9 +1494,9 @@ namespace Project_FinchControl
                 Console.WriteLine("\t{0} Sum: {1}", forWhat, sum.ToString("n2"));
                 Console.WriteLine("\t{0} Average: {1}", forWhat, average.ToString("n2"));
             }
-            
+
         }
-        
+
         //This table is for displaying temperature data.
         static void DataRecorderDisplayTable(double[] temperatures)
         {
@@ -1531,14 +1531,14 @@ namespace Project_FinchControl
             DisplayScreenHeader("Get Data");
 
             //This prevents the user from trying to collect data without inputting how many and how often of temperature readings taken.
-            if (numberOfDataPoints==0||dataPointFrequency==0)
+            if (numberOfDataPoints == 0 || dataPointFrequency == 0)
             {
                 Console.WriteLine("\tPlease return to the Data Recorder Menu.");
                 Console.WriteLine("\tYou need to enter the number of data points and the frequency for them to be recordered.");
             }
 
             //Prompts the user to connect the Finch if it is not already connected.
-            else if(!finchRobot.connect())
+            else if (!finchRobot.connect())
             {
                 Console.WriteLine("\tPlease connect your Finch robot.");
                 Console.WriteLine("\tWould you like to be taken to the Connect Finch menu? Yes or No");
@@ -1551,8 +1551,8 @@ namespace Project_FinchControl
             }
 
             //An else statement that allows for the collection of temperatures.
-            else 
-            {                
+            else
+            {
                 Console.WriteLine($"\tNumber of data points: {numberOfDataPoints}");
                 Console.WriteLine($"\tData point frequency: {dataPointFrequency}");
                 Console.WriteLine();
@@ -1576,7 +1576,7 @@ namespace Project_FinchControl
                 YesOrNoValidation(userResponse);
                 Console.WriteLine();
 
-                if (userResponse == "yes") 
+                if (userResponse == "yes")
                 {
                     DisplayScreenHeader("Get Data");
                     Console.WriteLine();
@@ -1586,7 +1586,7 @@ namespace Project_FinchControl
                     double tempAverage = AverageOfAnArray(tempSum, temperatures.Length);
                     DataRecorderDisplayTable(temperatures);
                     DataRecorderDisplaySumAndAverages("Temperature", tempSum, tempAverage);
-                }                            
+                }
             }
 
             DisplayContinuePrompt();
@@ -1633,14 +1633,14 @@ namespace Project_FinchControl
             //validate user input
             numberResponse = Console.ReadLine();
             Console.WriteLine();
-            while (!Int32.TryParse(numberResponse, out numberOfDataPoints)||numberOfDataPoints<=0)
+            while (!Int32.TryParse(numberResponse, out numberOfDataPoints) || numberOfDataPoints <= 0)
             {
                 Console.WriteLine("\tPlease enter an integer above zero.");
                 Console.Write("\tNumber of data points: ");
                 numberResponse = Console.ReadLine();
                 Console.WriteLine();
             }
-                return numberOfDataPoints;
+            return numberOfDataPoints;
         }
 
         //My method for converting Celsius to Fahrenheit.
@@ -1659,26 +1659,26 @@ namespace Project_FinchControl
         /// <param name="finchRobot"></param>
         static void LightAlarmDisplayMenuScreen(Finch finchRobot)
         {
-            
+
             Console.CursorVisible = true;
             bool quitMenu = false;
             string menuChoice;
             string menuSwith = "light";
-            string sensorsToMonitor="";
-            string rangeType="";
-            int minMaxThresholdValue=0;
-            int timeToMonitor=0;
+            string sensorsToMonitor = "";
+            string rangeType = "";
+            int minMaxThresholdValue = 0;
+            int timeToMonitor = 0;
             string rangeTypeTemperature = "";
             double minMaxThresholdValueTemperature = 0;
-            
 
-            do 
+
+            do
             {
                 //This loop is for setting variables for the Light Alarm
-                while (menuSwith == "light"&&!quitMenu)
+                while (menuSwith == "light" && !quitMenu)
                 {
                     DisplayScreenHeader("Light Alarm Menu");
-                    
+
                     Console.WriteLine("\ta) Set Sensors to Monitor");
                     Console.WriteLine("\tb) Set Range Type");
                     Console.WriteLine("\tc) Set Minimum/Maximum Threshold Value");
@@ -1691,14 +1691,14 @@ namespace Project_FinchControl
                     //This displaces the light reading after the user pick a light sensor
                     if (sensorsToMonitor != "")
                     {
-                       LightAlarmLightLevelFixedLocation(sensorsToMonitor, finchRobot);
+                        LightAlarmLightLevelFixedLocation(sensorsToMonitor, finchRobot);
                         Console.SetCursorPosition(0, 11);
                     }
                     Console.Write("\t\tEnter Choice: ");
-                   
+
                     menuChoice = Console.ReadLine().ToLower();
-                    
-                    
+
+
                     //
                     // process user menu choice
                     //
@@ -1744,7 +1744,7 @@ namespace Project_FinchControl
                     }
                 }
                 //This loop is for setting the variables for the Temperature Alarm
-                while (menuSwith == "temperature"&&!quitMenu)
+                while (menuSwith == "temperature" && !quitMenu)
                 {
                     DisplayScreenHeader("Temperature Alarm Menu");
                     Console.WriteLine("\ta) Set Range Type");
@@ -1783,7 +1783,7 @@ namespace Project_FinchControl
                             break;
 
                         case "f":
-                            LightAndTemperatureAlarmDisplayMenuScreenSetAlarm(finchRobot, sensorsToMonitor, rangeType, rangeTypeTemperature, minMaxThresholdValue, timeToMonitor,minMaxThresholdValueTemperature);
+                            LightAndTemperatureAlarmDisplayMenuScreenSetAlarm(finchRobot, sensorsToMonitor, rangeType, rangeTypeTemperature, minMaxThresholdValue, timeToMonitor, minMaxThresholdValueTemperature);
                             break;
 
                         case "q":
@@ -2042,14 +2042,14 @@ namespace Project_FinchControl
             DisplayMenuPrompt("Temperature Alarm");
         }
 
-        
+
         //Method for setting the value for the max/min value.
         static double TemperatureAlarmDisplayMenuScreenSetMinMaxThresholdValue(string rangeType, Finch finchRobot)
         {
-            double minMaxThresholdValue=0;
+            double minMaxThresholdValue = 0;
             string userResponse;
-            
-             DisplayScreenHeader("Minimum/Maximum Thershold Value for Temperature");
+
+            DisplayScreenHeader("Minimum/Maximum Thershold Value for Temperature");
             if (rangeType == "")
             {
                 Console.WriteLine("\tPlease return to the Temperature Alarm menu and complete Set Range Type.");
@@ -2078,8 +2078,8 @@ namespace Project_FinchControl
                 Console.WriteLine();
                 Console.WriteLine($"\tThe {rangeType} thershold value is {minMaxThresholdValue} °F.");
             }
-                DisplayMenuPrompt("Temperature Alarm");
-            
+            DisplayMenuPrompt("Temperature Alarm");
+
             return minMaxThresholdValue;
         }
 
@@ -2100,10 +2100,10 @@ namespace Project_FinchControl
             return rangeType;
         }
 
-       //This is the method for Set Alarm for the light measured
+        //This is the method for Set Alarm for the light measured
         static void LightAlarmDisplayMenuScreenSetAlarm(
-            Finch finchRobot, 
-            string sensorsToMonitor, string rangeType, 
+            Finch finchRobot,
+            string sensorsToMonitor, string rangeType,
             int minMaxThresholdValue, int timeToMonitor)
         {
             int secondsElapsed = 0;
@@ -2195,7 +2195,7 @@ namespace Project_FinchControl
         {
             int timeToMonitor;
             DisplayScreenHeader("Time to Monitor");
-           
+
             Console.WriteLine();
 
             Console.Write($"\tEnter the time to monitor in seconds: ");
@@ -2261,7 +2261,7 @@ namespace Project_FinchControl
         {
             string rangeType;
 
-            DisplayScreenHeader("Set Range Type for Ambient Light");            
+            DisplayScreenHeader("Set Range Type for Ambient Light");
             Console.Write("\tRange Type [minimum, maximum]: ");
             //validates the user input maximum or minimum or max or min,
             rangeType = SetRangeTypeValiadation(Console.ReadLine().ToLower());
@@ -2282,7 +2282,7 @@ namespace Project_FinchControl
             Console.Write("\tSensors to monitor [left, right, both]: ");
             sensorsToMonitor = Console.ReadLine().ToLower();
             //Validates the user entering left, right, or both
-            sensorsToMonitor=SetSensorsToMonitorValiadation(sensorsToMonitor);
+            sensorsToMonitor = SetSensorsToMonitorValiadation(sensorsToMonitor);
             DisplayContinuePrompt();
             Console.WriteLine();
             Console.WriteLine($"\tThe {sensorsToMonitor} sensor(s) was chosen.");
@@ -2311,11 +2311,11 @@ namespace Project_FinchControl
                 userResponse = Console.ReadLine().ToLower();
                 Console.WriteLine();
             }
-            if (userResponse=="min")
+            if (userResponse == "min")
             {
                 userResponse = "minimum";
             }
-            else if (userResponse=="max")
+            else if (userResponse == "max")
             {
                 userResponse = "maximum";
             }
@@ -2327,7 +2327,7 @@ namespace Project_FinchControl
         static int IntNumberValidationBetweenZeroandTwoHundredFiftyFive(string numberResponse)
         {
             int numberOfDataPoints;
-            while (!Int32.TryParse(numberResponse, out numberOfDataPoints) || numberOfDataPoints < 0 || numberOfDataPoints>255)
+            while (!Int32.TryParse(numberResponse, out numberOfDataPoints) || numberOfDataPoints < 0 || numberOfDataPoints > 255)
             {
                 Console.WriteLine("\tPlease enter an integer that is between 0 and 255.");
                 Console.Write("\tNumber: ");
@@ -2351,13 +2351,12 @@ namespace Project_FinchControl
             Console.CursorVisible = false;
             bool quitMenu = false;
             string menuChoice;
-            //Tuple for paramates
-            (int motorSpeed, int ledBrightness, int noiseLoudness, double waitSeconds,List<Command> commands) commandParameters;
+            //Tuple for parameters
+            (int motorSpeed, int ledBrightness, int noiseLoudness, List<(Command command, int actionDuration)> commands) commandParameters;
             commandParameters.motorSpeed = 0;
             commandParameters.ledBrightness = 0;
             commandParameters.noiseLoudness = 0;
-            commandParameters.waitSeconds = 0;
-            commandParameters.commands = new List<Command>();
+            commandParameters.commands = new List<(Command, int)>();
 
             do
             {
@@ -2370,6 +2369,8 @@ namespace Project_FinchControl
                 Console.WriteLine("\tb) Add Commands");
                 Console.WriteLine("\tc) View Commands");
                 Console.WriteLine("\td) Execute Commands");
+                Console.WriteLine("\te) Save Current Commands");
+                Console.WriteLine("\tf) Load Saved Commands");
                 Console.WriteLine("\tq) Main Menu");
                 Console.Write("\t\tEnter Choice: ");
                 menuChoice = Console.ReadLine().ToLower();
@@ -2392,9 +2393,16 @@ namespace Project_FinchControl
                         break;
 
                     case "d":
-                        UserProgrammingDisplayExecuteCommands(commandParameters,finchRobot);
+                        UserProgrammingDisplayExecuteCommands(commandParameters, finchRobot);
                         break;
-                                            
+
+                    case "e":
+                        UserProgrammingDisplaySaveCurrentCommands(commandParameters);
+                        break;
+                    case "f":
+                        commandParameters = UserProgrammingDisplayLoadPreviousCommands(commandParameters);
+                        break;
+
                     case "q":
                         quitMenu = true;
                         break;
@@ -2411,24 +2419,578 @@ namespace Project_FinchControl
         }
 
         /// <summary>
+        /// This method is for the Loading Saved Commands menu.
+        /// </summary>
+        /// <param name="commandParameters"></param>
+        /// <returns></returns>
+        static (int motorSpeed, int ledBrightness, int noiseLoudness, List<(Command command, int actionDuration)> commands) UserProgrammingDisplayLoadPreviousCommands((int motorSpeed, int ledBrightness, int noiseLoudness, List<(Command command, int actionDuration)> commands) commandParameters)
+        {
+            string menuChoice;
+            string viewingCommands;
+            string dataPath1 = @"Data\File1Commands.txt";
+            string dataPath2 = @"Data\File2Commands.txt";
+            string dataPath3 = @"Data\File3Commands.txt";
+            string[] file1Commands;
+            string[] file2Commands;
+            string[] file3Commands;
+            (int motorSpeed1, int ledBrightness1, int noiseLoudness1, List<(Command command1, int actionDuration1)> commands1) viewParameters;
+
+
+            bool quitMenu = false;
+            DisplayScreenHeader("Load Saved Commands");
+
+            //The try and catch methods are from the example application.
+            try
+            {
+                file1Commands = File.ReadAllLines(dataPath1);
+                file2Commands = File.ReadAllLines(dataPath2);
+                file3Commands = File.ReadAllLines(dataPath3);
+                while (!quitMenu)
+                {
+                    //Displays the file's names and date/time of creation
+                    Console.WriteLine($"\ta) File 1: {GetFileNameAndTime(dataPath1)}");
+                    Console.WriteLine($"\tb) File 2: {GetFileNameAndTime(dataPath2)}");
+                    Console.WriteLine($"\tc) File 3: {GetFileNameAndTime(dataPath3)}");
+                    Console.WriteLine("\td) Erase Save Data");
+                    Console.WriteLine("\tq) User Programming Menu");
+                    Console.Write("\t\tEnter Choice: ");
+                    menuChoice = Console.ReadLine().ToLower();
+                    switch (menuChoice)
+                    {
+                        //Uses various methods to read and display the file before it is added to the command list.
+                        case "a":
+                            viewParameters = ReadingFilesFromTxtToTuple(file1Commands);
+                            viewingCommands = ViewSavedCommandsAndParameters(viewParameters, "File 1");
+                            if (viewingCommands == "yes")
+                            {
+                                commandParameters = viewParameters;
+                                Console.WriteLine($"File 1: {GetFileNameAndTime(dataPath1)} has been loaded.");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"File 1: {GetFileNameAndTime(dataPath1)} has not been loaded.");
+                            }
+                            quitMenu = true;
+                            break;
+
+                        case "b":
+                            viewParameters = ReadingFilesFromTxtToTuple(file2Commands);
+                            viewingCommands = ViewSavedCommandsAndParameters(viewParameters, "File 2");
+                            if (viewingCommands == "yes")
+                            {
+                                commandParameters = viewParameters;
+                                Console.WriteLine($"File 2: {GetFileNameAndTime(dataPath2)} has been loaded.");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"File 2: {GetFileNameAndTime(dataPath2)} has not been loaded.");
+                            }
+                            quitMenu = true;
+                            break;
+
+                        case "c":
+                            viewParameters = ReadingFilesFromTxtToTuple(file3Commands);
+                            viewingCommands = ViewSavedCommandsAndParameters(viewParameters, "File 3");
+                            if (viewingCommands == "yes")
+                            {
+                                commandParameters = viewParameters;
+                                Console.WriteLine($"File 3: {GetFileNameAndTime(dataPath3)} has been loaded.");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"File 3: {GetFileNameAndTime(dataPath3)} has not been loaded.");
+                            }
+                            quitMenu = true;
+                            break;
+
+                        case "d":
+                            Console.WriteLine("\tWhich File would you like to erase?");
+                            string fileToErase = ValiationForErasingFiles(dataPath1, dataPath2, dataPath3, Console.ReadLine().ToLower());
+                            EraseSavedCommands(fileToErase);
+                            quitMenu = true;
+                            break;
+
+                        case "q":
+                            quitMenu = true;
+                            break;
+
+                        default:
+                            Console.WriteLine();
+                            Console.WriteLine("\tPlease enter a letter for the menu choice.");
+                            DisplayContinuePrompt();
+                            break;
+                    }
+                }
+            }
+            catch (DirectoryNotFoundException)
+            {
+                Console.WriteLine("\tUnable to locate the folder for the data file.");
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("\tUnable to locate the data file.");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("\tUnable to read data file.");
+            }
+
+            DisplayMenuPrompt("User Programming");
+            return commandParameters;
+        }
+
+
+        /// <summary>
+        /// This method resets the file to "blank".
+        /// </summary>
+        /// <param name="fileToErase"></param>
+        static void EraseSavedCommands(string fileToErase)
+        {
+            if (fileToErase != "")
+            {
+                File.WriteAllText(fileToErase, "blank");
+                Console.WriteLine("\tThe File has been deleted.");
+            }
+            else
+            {
+                Console.WriteLine("\tNo Files were deleted.");
+            }
+        }
+
+        /// <summary>
+        /// This method is for validating the user response and setting the right data path.
+        /// </summary>
+        /// <param name="file1Path"></param>
+        /// <param name="file2Path"></param>
+        /// <param name="file3Path"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        static string ValiationForErasingFiles(string file1Path, string file2Path, string file3Path, string fileName)
+        {
+            bool realFileName = false;
+            string userResponse;
+            string fileToBeDeleted = "";
+
+            //This validates the user enter an existing file.
+            while (!realFileName)
+            {
+                //This sorts the user responses to the corrent data path for the file.
+                if (fileName == "1" || fileName == "file 1" || fileName == "file1")
+                {
+                    Console.WriteLine("\tAre you sure you want to erase File 1? Yes/No");
+                    userResponse = YesOrNoValidation(Console.ReadLine().ToLower());
+                    if (userResponse == "yes")
+                    {
+                        Console.WriteLine("\tFile 1 will be deleted.");
+                        fileToBeDeleted = file1Path;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\tFile 1 will not be deleted.");
+
+                    }
+                    realFileName = true;
+                }
+                else if (fileName == "2" || fileName == "file 2" || fileName == "file2")
+                {
+                    Console.WriteLine("\tAre you sure you want to erase File 2? Yes/No");
+                    userResponse = YesOrNoValidation(Console.ReadLine().ToLower());
+                    if (userResponse == "yes")
+                    {
+                        Console.WriteLine("\tFile 2 will be deleted.");
+                        fileToBeDeleted = file2Path;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\tFile 2 will not be deleted.");
+
+                    }
+                    realFileName = true;
+                }
+                else if (fileName == "3" || fileName == "file 3" || fileName == "file3")
+                {
+                    Console.WriteLine("\tAre you sure you want to erase File 3? Yes/No");
+                    userResponse = YesOrNoValidation(Console.ReadLine().ToLower());
+                    if (userResponse == "yes")
+                    {
+                        Console.WriteLine("\tFile 3 will be deleted.");
+                        fileToBeDeleted = file3Path;
+                    }
+                    else
+                    {
+                        Console.WriteLine("\tFile 3 will not be deleted.");
+
+                    }
+                    realFileName = true;
+                }
+                else
+                {
+                    Console.WriteLine("\tPlease enter a valid file name. The format is 'File #' or '#'.");
+                    fileName = Console.ReadLine().ToLower();
+                }
+            }
+
+            return fileToBeDeleted;
+        }
+
+        /// <summary>
+        /// This method is for reading the text file and converting it to command list and parameters.
+        /// </summary>
+        /// <param name="fileCommands"></param>
+        /// <returns></returns>
+        static (int motorSpeed, int ledBrightness, int noiseLoudness, List<(Command command, int actionDuration)> commands) ReadingFilesFromTxtToTuple(string[] fileCommands)
+        {
+            (int motorSpeed, int ledBrightness, int noiseLoudness, List<(Command command, int actionDuration)> commands) commandParameters;
+            commandParameters.motorSpeed = 0;
+            commandParameters.ledBrightness = 0;
+            commandParameters.noiseLoudness = 0;
+            commandParameters.commands = new List<(Command command, int actionDuration)>();
+
+            string[] parameterArray;
+            string[] commandAndDuration;
+            
+
+            (Command commandTxt, int duration) commandList;
+
+            //splits the line into arrays based on ','
+            parameterArray = fileCommands[1].Split(',');
+            commandParameters.motorSpeed = int.Parse(parameterArray[0]);
+            commandParameters.ledBrightness = int.Parse(parameterArray[1]);
+            commandParameters.noiseLoudness = int.Parse(parameterArray[2]);
+
+            //splits the line into arrays based on ','
+            commandAndDuration = fileCommands[2].Split(',');
+
+            //adds the commands and duration into the list
+            for (int x = 0; x < commandAndDuration.Length; x = x + 2)
+            {
+
+                Enum.TryParse(commandAndDuration[x], out commandList.commandTxt);
+                commandList.duration = int.Parse(commandAndDuration[x + 1]);
+                commandParameters.commands.Add(commandList);
+
+            }
+
+            return commandParameters;
+        }
+
+        /// <summary>
+        /// Display the Save Current Commands menu.
+        /// </summary>
+        /// <param name="commandParameters"></param>
+        static void UserProgrammingDisplaySaveCurrentCommands(
+            (int motorSpeed, int ledBrightness, int noiseLoudness,
+            List<(Command command, int actionDuration)> commands) commandParameters)
+        {
+            string menuChoice;
+            string dataPath1 = @"Data\File1Commands.txt";
+            string dataPath2 = @"Data\File2Commands.txt";
+            string dataPath3 = @"Data\File3Commands.txt";
+            string yesOrNo = "";
+            string fileSaveCondition;
+
+            int motorSpeed = commandParameters.motorSpeed;
+            int ledBrightness = commandParameters.ledBrightness;
+            int noiseLoudness = commandParameters.noiseLoudness;
+            List<(Command command, int actionDuration)> commands = commandParameters.commands;
+
+            bool quitMenu = false;
+
+            DisplayScreenHeader("Save Current Commands");
+            //This validates that the user added commands.
+            if (commands.Count == 0)
+            {
+                Console.WriteLine("\tPlease complete Add Commands");
+                DisplayMenuPrompt("User Programming");
+            }
+
+            //This validates that the user added parameters.
+            else if (motorSpeed == 0 || ledBrightness == 0 || noiseLoudness == 0)
+            {
+                Console.WriteLine("\tPlease complete Command Parameters");
+                DisplayMenuPrompt("User Programming");
+            }
+
+            else
+            {
+                while (!quitMenu)
+                {
+                    Console.WriteLine($"\ta) File 1: {GetFileNameAndTime(dataPath1)}");
+                    Console.WriteLine($"\tb) File 2: {GetFileNameAndTime(dataPath2)}");
+                    Console.WriteLine($"\tc) File 3: {GetFileNameAndTime(dataPath3)}");
+                    Console.WriteLine("\tq) User Programming Menu");
+                    Console.Write("\t\tEnter Choice: ");
+                    menuChoice = Console.ReadLine().ToLower();
+                    switch (menuChoice)
+                    {
+                        //Leads to methods that ask if the users really want to save their command lists.
+                        //It makes the quitMenu true, to take them back to User Programming menu because I 
+                        //couldn't figure how to restart the menu display.
+                        case "a":
+                            yesOrNo = ViewCurrentCommandsAndParameters(commandParameters);
+                            if (yesOrNo == "yes")
+                                yesOrNo = AreYouSureYouWantToSave(yesOrNo, dataPath1);
+                            if (yesOrNo == "yes")
+                            {
+                                fileSaveCondition=SavingTheFileToText(dataPath1, yesOrNo, commandParameters);
+                                Console.WriteLine();
+                                Console.WriteLine($"\tFile 1: {fileSaveCondition}");
+                            }
+                            else
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine($"\tFile 1: {GetFileNameAndTime(dataPath1)} was not saved.");
+                            }
+                            DisplayContinuePrompt();
+                            quitMenu = true;
+                            break;
+                        case "b":
+                            yesOrNo = ViewCurrentCommandsAndParameters(commandParameters);
+                            if (yesOrNo == "yes")
+                                yesOrNo = AreYouSureYouWantToSave(yesOrNo, dataPath2);
+                            if (yesOrNo == "yes")
+                            {
+                                fileSaveCondition=SavingTheFileToText(dataPath2, yesOrNo, commandParameters);
+                                Console.WriteLine();
+                                Console.WriteLine($"\tFile 2: {fileSaveCondition}");
+                            }
+                            else
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine($"\tFile 2: {GetFileNameAndTime(dataPath2)} was not saved.");
+                            }
+                            DisplayContinuePrompt();
+                            quitMenu = true;
+                            break;
+                        case "c":
+                            yesOrNo = ViewCurrentCommandsAndParameters(commandParameters);
+                            if (yesOrNo == "yes")
+                                yesOrNo = AreYouSureYouWantToSave(yesOrNo, dataPath3);
+                            if (yesOrNo == "yes")
+                            {
+                                fileSaveCondition=SavingTheFileToText(dataPath3, yesOrNo, commandParameters);
+                                Console.WriteLine();
+                                Console.WriteLine($"\tFile 3: {fileSaveCondition}");
+                            }
+                            else
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine($"\tFile 3: {GetFileNameAndTime(dataPath3)} was not saved.");
+                            }
+                            DisplayContinuePrompt();
+                            quitMenu = true;
+                            break;
+                        case "q":
+                            quitMenu = true;
+                            break;
+
+                        default:
+                            Console.WriteLine();
+                            Console.WriteLine("\tPlease enter a letter for the menu choice.");
+                            DisplayContinuePrompt();
+                            break;
+                    }
+                }
+
+
+            }
+        }
+
+        //This method checks if the file already have saved data.
+        static string AreYouSureYouWantToSave(string yesOrNo, string dataPath)
+        {
+            string[] fileInfoLines = File.ReadAllLines(dataPath);
+            string userResponse = "";
+            if (fileInfoLines[0] != "blank")
+            {
+                Console.WriteLine("\tThere is an existing file here. Are you sure you want to overwrite it? Yes/No");
+                userResponse = YesOrNoValidation(Console.ReadLine().ToLower());
+            }
+            else
+            {
+                userResponse = "yes";
+            }
+            return userResponse;
+        }
+
+        //This method is for displaying the name of saved files.
+        static string GetFileNameAndTime(string path)
+        {
+            string fileNameAndTime;
+            string[] fileInfoLines;
+
+            //It only cares about the first line, the title line.
+            fileInfoLines = File.ReadAllLines(path);
+            if (fileInfoLines[0] == "blank")
+                fileNameAndTime = "Blank";
+            else
+                fileNameAndTime = fileInfoLines[0];
+
+            return fileNameAndTime;
+        }
+
+
+        /// <summary>
+        /// This is a timestamp method. It displays "MM/DD/YYYY HH:MM"
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static String GetTimestamp(DateTime value)
+        {
+            return value.ToString("g");
+        }
+
+
+        /// <summary>
+        /// This method shows the current commands parameters that will be saved to the file if the user wishes to.
+        /// </summary>
+        /// <param name="commandParameters"></param>
+        /// <returns></returns>
+        static string ViewCurrentCommandsAndParameters((int motorSpeed, int ledBrightness, int noiseLoudness, List<(Command command, int actionDuration)> commands) commandParameters)
+        {
+            string userResponse;
+            List<(Command command, int actionDuration)> commands = commandParameters.commands;
+            DisplayScreenHeader("Current Parameters and Commands");
+
+            Console.WriteLine($"\tThe motor speed is currently set to {commandParameters.motorSpeed}.");
+            Console.WriteLine($"\tThe LED brightness is currently set to {commandParameters.ledBrightness}.");
+            Console.WriteLine($"\tThe noise frequency is currently set to {commandParameters.noiseLoudness}.");
+            Console.WriteLine("\tThe current commands are: ");
+            foreach ((Command commandInput, int waitSeconds) in commands)
+            {
+                if (commandInput == Command.DANCE || commandInput == Command.DONE ||
+                    commandInput == Command.GETLIGHTREADING || commandInput == Command.GETTEMPERATURE ||
+                    commandInput == Command.ALLOFF)
+                {
+                    Console.WriteLine($"\t\t{commandInput}");
+                }
+                else
+                {
+                    Console.WriteLine($"\t\t{commandInput}: {waitSeconds / 1000} seconds");
+                }
+            }
+            Console.WriteLine();
+            Console.WriteLine("\tWould you like to continue with these settings? Yes/No");
+            userResponse = YesOrNoValidation(Console.ReadLine().ToLower());
+            Console.WriteLine();
+            return userResponse;
+        }
+
+        /// <summary>
+        /// This method displays the parameters and commands of the saved file.
+        /// </summary>
+        /// <param name="commandParameters"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        static string ViewSavedCommandsAndParameters((int motorSpeed, int ledBrightness, int noiseLoudness, List<(Command command, int actionDuration)> commands) commandParameters, string fileName)
+        {
+            string userResponse;
+            List<(Command command, int actionDuration)> commands = commandParameters.commands;
+            DisplayScreenHeader($"Parameters and Commands of {fileName}");
+
+            Console.WriteLine($"\tThe motor speed is currently set to {commandParameters.motorSpeed}.");
+            Console.WriteLine($"\tThe LED brightness is currently set to {commandParameters.ledBrightness}.");
+            Console.WriteLine($"\tThe noise frequency is currently set to {commandParameters.noiseLoudness}.");
+            Console.WriteLine("\tThe current commands are: ");
+            foreach ((Command commandInput, int waitSeconds) in commands)
+            {
+                if (commandInput == Command.DANCE || commandInput == Command.DONE ||
+                    commandInput == Command.GETLIGHTREADING || commandInput == Command.GETTEMPERATURE ||
+                    commandInput == Command.ALLOFF)
+                {
+                    Console.WriteLine($"\t\t{commandInput}");
+                }
+                else
+                {
+                    Console.WriteLine($"\t\t{commandInput}: {waitSeconds / 1000} seconds");
+                }
+            }
+            Console.WriteLine();
+            Console.WriteLine("\tWould you like to load these settings? Yes/No");
+            userResponse = YesOrNoValidation(Console.ReadLine().ToLower());
+            Console.WriteLine();
+            return userResponse;
+        }
+
+        /// <summary>
+        /// This method saves the current commands into the selected text file.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="userResponse"></param>
+        /// <param name="commandParameters"></param>
+        /// <returns></returns>
+        static string SavingTheFileToText(string path, string userResponse,
+           (int motorSpeed, int ledBrightness, int noiseLoudness, List<(Command command, int actionDuration)> commands) commandParameters)
+        {
+            string savingStatus = "";
+            string fileName;
+            string parameterString;
+            string listToString;
+
+            parameterString = commandParameters.motorSpeed.ToString() + "," + commandParameters.ledBrightness.ToString() + "," + commandParameters.noiseLoudness.ToString();
+            if (userResponse == "yes")
+            {
+                Console.WriteLine("\tWhat would you like the name of the commands to be?");
+                fileName = Console.ReadLine();
+
+                //try and catch taken from the example
+                try
+                {
+                    //Overwrites the file with the file a name with date and time. 
+                    File.WriteAllText(path, fileName + " " + GetTimestamp(DateTime.Now) + "\n");
+                    //Adds a line for paramtes
+                    File.AppendAllText(path, parameterString + "\n");
+
+                    //Converts the list to strings, removes the parentheses, and separate them by commas.
+                    listToString = string.Join(",", commandParameters.commands).Replace("(", "").Replace(")", "");
+                    File.AppendAllText(path, listToString);
+
+                    savingStatus = $"{GetFileNameAndTime(path)} has been saved.";                    
+
+                }
+                catch (DirectoryNotFoundException)
+                {
+                    savingStatus="Unable to locate the folder for the data file.";
+                }
+                catch (FileNotFoundException)
+                {
+                    savingStatus="Unable to locate the data file.";
+                }
+                catch (Exception)
+                {
+                    savingStatus="Unable to read data file.";
+                }
+            }
+            else
+            {
+                savingStatus = $"The {GetFileNameAndTime(path)} was not saved.";                
+            }
+
+            return savingStatus;
+
+        }
+
+
+
+
+        /// <summary>
         /// This method allows for the input of the parameters.
         /// I needed to add the list to it so I could set it to the list in the tuple.
         /// </summary>
         /// <param name="commands"></param>
         /// <returns></returns>
-        static (int motorSpeed, int ledBrightness, int noiseLoudness, double waitSeconds, List<Command> commands) UserProgrammingDisplayCommandParameters(List<Command> commands)
+        static (int motorSpeed, int ledBrightness, int noiseLoudness, List<(Command command, int actionDuration)> commands) UserProgrammingDisplayCommandParameters(List<(Command command, int actionDuration)> commands)
         {
             DisplayScreenHeader("Command Parameters");
 
-            (int motorSpeed, int ledBrightness, int noiseLoudness, double waitSeconds, List<Command> commands) commandParameters;
+            (int motorSpeed, int ledBrightness, int noiseLoudness, List<(Command command, int actionDuration)> commands) commandParameters;
             commandParameters.motorSpeed = 0;
             commandParameters.ledBrightness = 0;
             commandParameters.noiseLoudness = 0;
-            commandParameters.waitSeconds = 0;
             commandParameters.commands = commands;
 
             (string noteInput, int noteFreq) noteParameters;
-            noteParameters.noteInput  = "";
+            noteParameters.noteInput = "";
             noteParameters.noteFreq = 0;
 
             Console.WriteLine("\tEnter the motor speed: [1-255]");
@@ -2437,26 +2999,25 @@ namespace Project_FinchControl
             commandParameters.ledBrightness = IntNumberValidationBetweenOneandTwoHundredFiftyFive(Console.ReadLine());
             Console.WriteLine("\tEnter one of the following notes.");
 
-            foreach(string noteName in Enum.GetNames(typeof(Note)))
+            foreach (string noteName in Enum.GetNames(typeof(Note)))
             {
                 Console.Write($" {noteName} ");
             }
             Console.WriteLine();
             noteParameters = NoteValitations(Console.ReadLine().ToUpper());
             commandParameters.noiseLoudness = noteParameters.noteFreq;
-            Console.WriteLine("\tEnter the amount of seconds for the command duration.");
-            Console.WriteLine("\tIt is recommended that wait duration do not exceed 10 seconds");
-            commandParameters.waitSeconds = DoubleNumberValidationAboveZero(Console.ReadLine());
+
             Console.WriteLine();
             Console.WriteLine($"\tThe motor speed was set to {commandParameters.motorSpeed}.");
             Console.WriteLine($"\tThe LED brightness was set to {commandParameters.ledBrightness}.");
             Console.WriteLine($"\tThe note was set to {noteParameters.noteInput}, at a frequency of {commandParameters.noiseLoudness}.");
-            Console.WriteLine($"\tThe wait duration was set to {commandParameters.waitSeconds} seconds");
+
             DisplayMenuPrompt("User Programming");
 
 
             return commandParameters;
         }
+
 
         /// <summary>
         /// This is my validation for notes.
@@ -2470,7 +3031,7 @@ namespace Project_FinchControl
             noteParameters.noteInput = v;
             noteParameters.noteFreq = 0;
             bool trueNote = false;
-            
+
             while (!trueNote)
             {
                 if (v == "C")
@@ -2512,8 +3073,8 @@ namespace Project_FinchControl
                 {
                     Console.WriteLine("\tPlease enter in a note from above.");
                     v = Console.ReadLine().ToUpper();
-                }                      
-              
+                }
+
             }
             return noteParameters;
 
@@ -2534,15 +3095,46 @@ namespace Project_FinchControl
 
         }
 
+        static int IntValidationWithCoderInput(string numberResponse, int lowerNumber, int higherNumber)
+        {
+            int numberOfDataPoints;
+            while (!Int32.TryParse(numberResponse, out numberOfDataPoints) || numberOfDataPoints < lowerNumber || numberOfDataPoints > higherNumber)
+            {
+                Console.WriteLine($"\tPlease enter an integer that is between {lowerNumber} and {higherNumber}.");
+                Console.Write("\tNumber: ");
+                numberResponse = Console.ReadLine();
+                Console.WriteLine();
+            }
+            return numberOfDataPoints;
+        }
+        static double DoubleValidationWithCoderInput(string units, string beingAsked, double lowerNumber, double higherNumber)
+        {
+            double numberOfDataPoints;
+            string numberResponse;
+            Console.Write($"\tEnter a number for {units} between {lowerNumber} and {higherNumber} for {beingAsked}: ");
+            numberResponse = Console.ReadLine();
+
+            while (!Double.TryParse(numberResponse, out numberOfDataPoints) || numberOfDataPoints < lowerNumber || numberOfDataPoints > higherNumber)
+            {
+                Console.WriteLine($"\tPlease enter an integer that is between {lowerNumber} and {higherNumber}.");
+                Console.Write("\tNumber: ");
+                numberResponse = Console.ReadLine();
+                Console.WriteLine();
+            }
+            return numberOfDataPoints;
+        }
+
+
         /// <summary>
         /// This method allows the input of commands into a list.
         /// </summary>
         /// <param name="commands"></param>
-        static void UserProgrammingDisplayAddCommands(List<Command> commands)
+        static void UserProgrammingDisplayAddCommands(List<(Command command, int actionDuration)> commands)
         {
-
             commands.Clear();
+
             Command command = Command.NONE;
+            int actionDuration = 0;
 
             DisplayScreenHeader("Add Finch Commands");
 
@@ -2557,23 +3149,45 @@ namespace Project_FinchControl
                 Console.Write($"- {ti.ToTitleCase(commandName.ToLower())}");
                 if (commandCount % 5 == 0)
                     Console.Write("-\n\t-");
-                commandCount++;               
+                commandCount++;
             }
             Console.WriteLine();
-            while(command != Command.DONE)
+            Console.WriteLine();
+            while (command != Command.DONE)
             {
                 Console.Write("Enter Command: ");
                 if (Enum.TryParse(ShortHandCommmandList(Console.ReadLine().ToUpper()), out command))
                 {
-                    commands.Add(command);
+                    if (command == Command.DANCE || command == Command.DONE ||
+                    command == Command.GETLIGHTREADING || command == Command.GETTEMPERATURE ||
+                    command == Command.ALLOFF)
+                    {
+                        actionDuration = 0;
+                        commands.Add((command, actionDuration));
+                    }
+
+                    else
+                    {
+                        actionDuration = (int)(DoubleValidationWithCoderInput("seconds", $"{command}", 0, 10) * 1000);
+                        commands.Add((command, actionDuration));
+                    }
                 }
                 else
-                    Console.WriteLine("\t Please enter a command from the list above.");
+                    Console.WriteLine("\tPlease enter a command from the list above.");
             }
             DisplayScreenHeader("View Commands");
-            foreach (Command commandInput in commands)
+            foreach ((Command commandInput, int waitSeconds) in commands)
             {
-                Console.WriteLine($"\t{commandInput}");
+                if (commandInput == Command.DANCE || commandInput == Command.DONE ||
+                    commandInput == Command.GETLIGHTREADING || commandInput == Command.GETTEMPERATURE ||
+                    commandInput == Command.ALLOFF)
+                {
+                    Console.WriteLine($"\t{commandInput}");
+                }
+                else
+                {
+                    Console.WriteLine($"\t{commandInput}: {waitSeconds / 1000} seconds");
+                }
             }
 
             DisplayMenuPrompt("User Programming");
@@ -2611,20 +3225,29 @@ namespace Project_FinchControl
         /// This method shows what is in the list for commands.
         /// </summary>
         /// <param name="commands"></param>
-        static void UserProgrammingDisplayViewCommands(List<Command> commands)
+        static void UserProgrammingDisplayViewCommands(List<(Command command, int actionDuration)> commands)
         {
             DisplayScreenHeader("View Commands");
 
-            if (commands.Count==0)
+            if (commands.Count == 0)
             {
                 Console.WriteLine("\tPlease complete Add Commands");
             }
             else
             {
-                foreach (Command commandInput in commands)
+                foreach ((Command commandInput, int waitSeconds) in commands)
                 {
-                    Console.WriteLine($"\t{commandInput}");
-                }                
+                    if (commandInput == Command.DANCE || commandInput == Command.DONE ||
+                    commandInput == Command.GETLIGHTREADING || commandInput == Command.GETTEMPERATURE ||
+                    commandInput == Command.ALLOFF)
+                    {
+                        Console.WriteLine($"\t{commandInput}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"\t{commandInput}: {waitSeconds / 1000} seconds");
+                    }
+                }
             }
             DisplayMenuPrompt("User Programming");
         }
@@ -2634,24 +3257,30 @@ namespace Project_FinchControl
         /// </summary>
         /// <param name="commandParameters"></param>
         /// <param name="finchRobot"></param>
-       static void UserProgrammingDisplayExecuteCommands(
-           (int motorSpeed, int ledBrightness, int noiseLoudness, double waitSeconds, List<Command> commands) commandParameters,
-           Finch finchRobot)
+        static void UserProgrammingDisplayExecuteCommands(
+            (int motorSpeed, int ledBrightness, int noiseLoudness, List<(Command command, int actionDuration)> commands) commandParameters,
+            Finch finchRobot)
         {
             int motorSpeed = commandParameters.motorSpeed;
             int ledBrightness = commandParameters.ledBrightness;
             int noiseLoudness = commandParameters.noiseLoudness;
-            int waitMilliSeconds = (int)(commandParameters.waitSeconds * 1000);
-            List <Command> commands = commandParameters.commands;
+
+            List<(Command command, int actionDuration)> commands = commandParameters.commands;
             string commandFeedback = "";
             const int TURNING_MOTOR_SPEED = 100;
 
             DisplayScreenHeader("Execute Finch Commands");
 
             //This validates that the user added commands.
-            if ( commands.Count == 0)
+            if (commands.Count == 0)
             {
                 Console.WriteLine("\tPlease complete Add Commands");
+            }
+
+            //This validates that the user added parameters.
+            else if (motorSpeed == 0 || ledBrightness == 0 || noiseLoudness == 0)
+            {
+                Console.WriteLine("\tPlease complete Command Parameters");
             }
 
             //Validates that the Finch is connected.
@@ -2672,73 +3301,86 @@ namespace Project_FinchControl
                 Console.WriteLine("\tThe Finch robot is ready to execute the list of commands.");
                 DisplayContinuePrompt();
 
-                foreach(Command command in commands)
+                foreach ((Command command, int duration) in commands)
                 {
-                    switch(command)
+                    switch (command)
                     {
                         case Command.NONE:
-                            commandFeedback = Command.NONE.ToString();                           
+                            commandFeedback = Command.NONE.ToString();
                             break;
                         case Command.MOVEFORWARD:
                             finchRobot.setMotors(motorSpeed, motorSpeed);
-                            commandFeedback = Command.MOVEFORWARD.ToString();                            
+                            commandFeedback = Command.MOVEFORWARD.ToString();
+                            finchRobot.wait(duration);
                             break;
                         case Command.MOVEBACKWARD:
                             finchRobot.setMotors(-motorSpeed, -motorSpeed);
-                            commandFeedback = Command.MOVEBACKWARD.ToString();                            
+                            commandFeedback = Command.MOVEBACKWARD.ToString();
+                            finchRobot.wait(duration);
                             break;
                         case Command.STOPMOTORS:
-                            finchRobot.setMotors(0,0);
+                            finchRobot.setMotors(0, 0);
                             commandFeedback = Command.MOVEBACKWARD.ToString();
+                            finchRobot.wait(duration);
                             break;
                         case Command.WAIT:
-                            finchRobot.wait(waitMilliSeconds);
                             commandFeedback = Command.WAIT.ToString();
+                            finchRobot.wait(duration);
                             break;
                         case Command.TURNLEFT:
                             finchRobot.setMotors(-TURNING_MOTOR_SPEED, TURNING_MOTOR_SPEED);
                             commandFeedback = Command.TURNLEFT.ToString();
+                            finchRobot.wait(duration);
                             break;
                         case Command.TURNRIGHT:
                             finchRobot.setMotors(TURNING_MOTOR_SPEED, -TURNING_MOTOR_SPEED);
                             commandFeedback = Command.TURNRIGHT.ToString();
+                            finchRobot.wait(duration);
                             break;
                         case Command.LEDON:
                             finchRobot.setLED(ledBrightness, ledBrightness, ledBrightness);
                             commandFeedback = Command.LEDON.ToString();
+                            finchRobot.wait(duration);
                             break;
                         case Command.LEDOFF:
-                            finchRobot.setLED(0,0,0);
+                            finchRobot.setLED(0, 0, 0);
                             commandFeedback = Command.LEDOFF.ToString();
+                            finchRobot.wait(duration);
                             break;
                         case Command.MAKENOISE:
                             finchRobot.noteOn(noiseLoudness);
                             commandFeedback = Command.MAKENOISE.ToString();
+                            finchRobot.wait(duration);
                             break;
                         case Command.STOPNOISE:
                             finchRobot.noteOff();
                             commandFeedback = Command.STOPNOISE.ToString();
+                            finchRobot.wait(duration);
                             break;
                         case Command.ALLOFF:
                             finchRobot.noteOff();
                             finchRobot.setLED(0, 0, 0);
                             finchRobot.setMotors(0, 0);
                             commandFeedback = Command.ALLOFF.ToString();
+                            finchRobot.wait(duration);
                             break;
                         case Command.ALLON:
                             finchRobot.setMotors(motorSpeed, motorSpeed);
                             finchRobot.setLED(ledBrightness, ledBrightness, ledBrightness);
                             finchRobot.noteOn(noiseLoudness);
                             commandFeedback = Command.ALLON.ToString();
+                            finchRobot.wait(duration);
                             break;
                         case Command.GETTEMPERATURE:
-                            commandFeedback= $"Temperature: {ConvertCelsiusToFahrenheit(finchRobot.getTemperature()).ToString("n")}°F\n";
+                            commandFeedback = $"Temperature: {ConvertCelsiusToFahrenheit(finchRobot.getTemperature()).ToString("n")}°F\n";
+                            finchRobot.wait(duration);
                             break;
                         case Command.GETLIGHTREADING:
                             commandFeedback = $"Light Reading: {(finchRobot.getLeftLightSensor() + finchRobot.getRightLightSensor()) / 2}\n";
+                            finchRobot.wait(duration);
                             break;
                         case Command.DANCE:
-                            TalentShowDisplayDance(finchRobot);
+                            BustAMove(finchRobot);
                             commandFeedback = Command.DANCE.ToString();
                             break;
                         case Command.DONE:
@@ -2754,6 +3396,10 @@ namespace Project_FinchControl
 
             DisplayMenuPrompt("User Programming");
         }
+        #endregion
+
+        #region Persistence
+
         #endregion
 
     }
